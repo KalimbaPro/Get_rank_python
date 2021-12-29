@@ -24,6 +24,8 @@ def get_levels(request):
 def get_role_queue_ranks(ratings):
     ranks = [0, 0, 0, 0]
 
+    if ratings == None:
+        return (ranks)
     for i in range (len(ratings)):
         ranks[int(ratings[i]['role'] == 'tank') + (int(ratings[i]['role'] == 'damage') * 2) + (int(ratings[i]['role'] == 'support') * 3)] = ratings[i]['level']
     return (ranks[1:])
@@ -52,7 +54,7 @@ def get_all_profile(url_list):
 def main():
     url_list = get_url("adress.txt")
     profile = get_all_profile(url_list)
-    
+
     write_file(profile)
     print("UPDATE COMPLETE")
 
